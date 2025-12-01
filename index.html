@@ -311,47 +311,104 @@
 </head>
 <body>
 
-  <!-- Book a Session -->
-  <section id="book-session">
-    <h2>Book a Session</h2>
-    <p>Schedule your massage therapy appointment below.</p>
-    <form>
-      <label for="name">Full Name</label>
-      <input type="text" id="name" name="name" required />
+ <!-- Book a Session -->
+<section id="book-session">
+  <h2>Book a Session</h2>
+  <p>Schedule your massage therapy appointment below.</p>
+  <form id="bookingForm" onsubmit="return sendBookingEmail(event)">
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" required />
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required />
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required />
 
-      <label for="phone">Phone</label>
-      <input type="tel" id="phone" name="phone" required />
+    <label for="phone">Phone</label>
+    <input type="tel" id="phone" name="phone" required />
 
-      <label for="massage-type">Massage Type</label>
-      <select id="massage-type" name="massage-type" required>
-        <option value="">Select Massage Type</option>
-        <!-- Options will be populated from the services list on page load -->
-      </select>
+    <label for="massage-type">Massage Type</label>
+    <select id="massage-type" name="massage-type" required>
+      <option value="">Select Massage Type</option>
+      <!-- Options will be populated from the services list on page load -->
+    </select>
 
-      <label for="notes">Additional Notes</label>
-      <textarea id="notes" name="notes" rows="4" placeholder="Any special requests?"></textarea>
+    <label for="notes">Additional Notes</label>
+    <textarea id="notes" name="notes" rows="4" placeholder="Any special requests?"></textarea>
 
-      <button type="submit">Book Now</button>
-    </form>
-  
-    <!-- Saved bookings will appear here -->
-    <div id="booking-confirmations">
-      <h3 style="color: #fff; margin-top:1.25rem;">Saved Bookings</h3>
-      <div id="booking-notice" class="notice" role="status" aria-live="polite">✅ Booking saved — Laura would reach you shortly</div>
-      <div id="bookings" class="booking-list"></div>
+    <button type="submit">Book Now</button>
+  </form>
+
+  <!-- Confirmation message (still shown after submission) -->
+  <div id="booking-confirmations" style="display:none; margin-top: 1.5rem;">
+    <h3 style="color: #fff; margin-top:1.25rem;">Saved Bookings</h3>
+    <div id="booking-notice" class="notice" role="status" aria-live="polite">
+      ✅ Booking submitted successfully! Laura will contact you shortly.
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Too Busy to Come -->
-  <section id="mobile-service">
-    <h2>Too Busy to Come?</h2>
-    <p>I’ll come to you! Send us a message to arrange an at-home session.</p>
-    <button>Message Now</button>
-  </section>
+<!-- Too Busy to Come? -->
+<section id="mobile-service">
+  <h2>Too Busy to Come?</h2>
+  <p>I’ll come to you! Send a message to arrange an at-home session.</p>
 
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; justify-content: center;">
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/+17074970947?text=Hi%20Laura%2C%20I'd%20like%20to%20book%20an%20at-home%20massage%20session.%20Please%20let%20me%20know%20your%20availability.%20Thank%20you!" 
+       target="_blank" 
+       class="whatsapp-btn" 
+       style="background:#25D366; color:white; padding:12px 24px; border-radius:50px; text-decoration:none; font-weight:bold; display:inline-flex; align-items:center; gap:8px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 5.576h-.004c-1.575-.001-3.112-.62-4.232-1.79l-.303-.18-4.164.996 1.008-3.696-.237-.375c-1.221-1.934-1.864-4.154-1.863-6.513.001-6.512 5.301-11.79 11.82-11.79 3.159.001 6.123 1.229 8.351 3.458 2.227 2.228 3.454 5.191 3.453 8.348-.001 6.512-5.301 11.79-11.829 11.79m10.013-19.295c-2.738-2.738-6.373-4.247-10.241-4.248-7.987.001-14.493 6.495-14.494 14.483 0 2.556.668 5.051 1.937 7.278l-2.053 7.494 7.686-2.014c2.119 1.157 4.51 1.768 6.917 1.768h.006c7.987 0 14.493-6.495 14.494-14.483 0-3.868-1.499-7.502-4.222-10.244-.001-.001-2.721-2.72-10.03-2.72"/></svg>
+      Message on WhatsApp
+    </a>
+
+    <!-- SMS/Text Button -->
+    <a href="sms:+17074970947?body=Hi%20Laura%2C%20I'd%20like%20to%20book%20an%20at-home%20massage%20session.%20When%20are%20you%20available%3F" 
+       class="sms-btn" 
+       style="background:#0088ff; color:white; padding:12px 24px; border-radius:50px; text-decoration:none; font-weight:bold; display:inline-flex; align-items:center; gap:8px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/><path d="M7 9h10v1H7zm0 3h7v1H7z"/></svg>
+      Message by Text (SMS)
+    </a>
+  </div>
+</section>
+
+<script>
+// Replace with your actual phone number (international format, no spaces/dashes)
+const YOUR_PHONE = "+17074970947";  // ← CHANGE THIS
+const YOUR_EMAIL = "torol8093@gmail.com"; // ← CHANGE THIS
+
+function sendBookingEmail(event) {
+  event.preventDefault();
+
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const massageType = document.getElementById('massage-type').value;
+  const notes = document.getElementById('notes').value.trim();
+
+  const subject = `New Massage Booking from ${name}`;
+  const body = `New Booking Request!\n\n` +
+               `Name: ${name}\n` +
+               `Email: ${email}\n` +
+               `Phone: ${phone}\n` +
+               `Massage Type: ${massageType || 'Not specified'}\n` +
+               `Notes: ${notes || 'None'}\n\n` +
+               `Please reply to the client as soon as possible.`;
+
+  const mailtoLink = `mailto:${YOUR_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  
+  // Open email client
+  window.location.href = mailtoLink;
+
+  // Show confirmation
+  document.getElementById('booking-confirmations').style.display = 'block';
+  document.getElementById('bookingForm').reset();
+
+  // Optional: scroll to confirmation
+  document.getElementById('booking-confirmations').scrollIntoView({ behavior: 'smooth' });
+
+  return false;
+}
+</script>
   <!-- Footer -->
   <footer>
     <h2>Contact Laura</h2>
